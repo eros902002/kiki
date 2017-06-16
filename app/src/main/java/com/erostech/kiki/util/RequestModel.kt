@@ -1,4 +1,4 @@
-package com.erostech.kiki
+package com.erostech.kiki.util
 
 import net.pubnative.sdk.core.request.PNAdModel
 import net.pubnative.sdk.core.request.PNRequest

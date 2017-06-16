@@ -1,4 +1,4 @@
-package com.erostech.kiki
+package com.erostech.kiki.ui.activities
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.erostech.kiki.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -13,6 +13,6 @@ class KikiApplication: Application() {
         Pubnative.setCoppaMode(false)
         val targetingModel = PNAdTargetingModel()
         Pubnative.setTargeting(targetingModel)
-        Pubnative.init(this, "7c26af3aa5f6c0a4ab9f4414787215f3bdd004f80b1b358e72c3137c94f5033c")
+        Pubnative.init(this, API_TOKEN)
     }
 }
