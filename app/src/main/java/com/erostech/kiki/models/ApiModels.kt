@@ -3,10 +3,6 @@ package com.erostech.kiki.models
 /**
  * Created by erosgarciaponte on 19.06.17.
  */
-class CountriesResponse(
-        val countries: List<CountryResponse>?
-)
-
 class CountryResponse(
         val name: String?,
         val topLevelDomain: List<String>?,
@@ -20,7 +16,7 @@ class CountryResponse(
         val population: Long,
         val latlng: List<String>?,
         val demonym: String?,
-        val area: Long,
+        val area: Double,
         val gini: Double,
         val timezones: List<String>?,
         val borders: List<String>?,

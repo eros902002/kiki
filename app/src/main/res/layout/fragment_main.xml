@@ -1,126 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.erostech.kiki.ui.fragments.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#484D51"
-        android:padding="5dp">
 
-        <Button
-            android:id="@+id/request_button"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:background="@android:color/transparent"
-            android:text="Request"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:id="@+id/ad_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/request_button"
-            android:background="#818D97">
-
-            <TextView
-                android:id="@+id/ad_adapter_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:background="#6a006e"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/ad_view_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ad_adapter_name_text">
-
-                <ImageView
-                    android:id="@+id/ad_icon_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:scaleType="centerCrop" />
-
-                <TextView
-                    android:id="@+id/ad_title_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/ad_icon_image"
-                    android:gravity="center_vertical" />
-
-                <RatingBar
-                    android:id="@+id/ad_rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_below="@+id/ad_title_text"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/ad_icon_image"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:stepSize="0.1" />
-
-                <ProgressBar
-                    android:id="@+id/ad_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/ad_description_text"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true" />
-
-                <RelativeLayout
-                    android:id="@+id/media_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/ad_icon_image"
-                    android:minHeight="150dp">
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/ad_description_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/media_container"
-                    android:layout_margin="5dp"
-                    android:gravity="center_vertical" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/ad_disclosure"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/ad_view_container"
-                android:layout_alignRight="@+id/ad_view_container"
-                android:layout_alignTop="@+id/ad_view_container"
-                android:gravity="right|top" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/countries_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

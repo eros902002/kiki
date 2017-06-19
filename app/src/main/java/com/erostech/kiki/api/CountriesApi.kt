@@ -1,6 +1,5 @@
 package com.erostech.kiki.api
 
-import com.erostech.kiki.models.CountriesResponse
 import com.erostech.kiki.models.CountryResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -9,6 +8,6 @@ import retrofit2.http.GET
  * Created by erosgarciaponte on 19.06.17.
  */
 interface CountriesApi {
-    @GET("all")
-    fun getCountries(): Call<CountriesResponse>
+    @GET("name/colombia")
+    fun getCountries(): Call<List<CountryResponse>>
 }
