@@ -7,7 +7,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.erostech.kiki.R;
-import com.erostech.kiki.models.Country;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.erostech.kiki.R;
-import com.erostech.kiki.models.Country;
 import com.erostech.kiki.ui.viewholders.CtViewHolder;
 
 import java.util.ArrayList;
