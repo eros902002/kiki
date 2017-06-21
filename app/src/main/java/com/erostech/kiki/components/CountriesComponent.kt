@@ -11,7 +11,7 @@ import javax.inject.Singleton
  * Created by erosgarciaponte on 19.06.17.
  */
 @Singleton
-        @Component(modules = arrayOf(AppModule::class, CountriesModule::class, NetworkModule::class))
-        interface CountriesComponent {
+@Component(modules = arrayOf(AppModule::class, CountriesModule::class, NetworkModule::class))
+interface CountriesComponent {
     fun inject(fragment: MainActivityFragment)
 }

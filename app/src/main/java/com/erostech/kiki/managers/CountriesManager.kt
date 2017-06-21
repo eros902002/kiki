@@ -11,7 +11,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class CountriesManager @Inject constructor(private val api: CountriesGenericApi) {
-    fun getCountries() : Observable<List<Country>> {
+    fun getCountries(): Observable<List<Country>> {
         return Observable.create { subscriber ->
             val callResponse = api.getCountries()
             val response = callResponse.execute()
