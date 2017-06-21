@@ -4,6 +4,9 @@ import android.app.Application
 import com.erostech.kiki.components.CountriesComponent
 import com.erostech.kiki.components.DaggerCountriesComponent
 import com.erostech.kiki.modules.AppModule
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.flurry.android.FlurryAgent
 import net.pubnative.sdk.core.Pubnative
 import net.pubnative.sdk.core.request.PNAdTargetingModel
 
@@ -18,10 +21,17 @@ class KikiApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Pubnative.setCoppaMode(false)
+        Pubnative.setCoppaMode(true)
         val targetingModel = PNAdTargetingModel()
         Pubnative.setTargeting(targetingModel)
         Pubnative.init(this, API_TOKEN)
+
+        FacebookSdk.sdkInitialize(applicationContext)
+        AppEventsLogger.activateApp(this)
+
+        FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .build(this, "DXYDJQ55RCS88VP9JF62")
 
         countriesComponent = DaggerCountriesComponent.builder().appModule(AppModule(this)).build()
     }

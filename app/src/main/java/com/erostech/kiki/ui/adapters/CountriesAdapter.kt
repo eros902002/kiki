@@ -22,6 +22,7 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
         delegateAdapters.put(AdapterConstants.PN_NATIVE_AD, PNNativeAdDelegateAdapter())
         delegateAdapters.put(AdapterConstants.PN_LAYOUT_SMALL_AD, PNSmallLayoutAdDelegateAdapter())
         delegateAdapters.put(AdapterConstants.PN_LAYOUT_MEDIUM_AD, PNMediumLayoutAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.MOPUD_NATIVE_AD, MoPubAdDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }

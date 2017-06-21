@@ -55,3 +55,12 @@ class PNMediumLayoutAdCell(var placementID: String) : ViewType {
 
     override fun getViewType(): Int = AdapterConstants.PN_LAYOUT_MEDIUM_AD
 }
+
+class MoPubAdCell(var adUnitId: String) : ViewType {
+
+    override fun hashCode(): Int {
+        return adUnitId.hashCode()
+    }
+
+    override fun getViewType(): Int = AdapterConstants.MOPUD_NATIVE_AD
+}

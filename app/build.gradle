@@ -67,6 +67,9 @@ dependencies {
     implementation('com.mopub:mopub-sdk:4.15.0@aar') {
         transitive = true
     }
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.flurry.android:analytics:7.0.0@aar'
+    implementation 'com.flurry.android:ads:7.0.0@aar'
 
     implementation 'net.pubnative:adapters.mopub:4.14.0.13'
 

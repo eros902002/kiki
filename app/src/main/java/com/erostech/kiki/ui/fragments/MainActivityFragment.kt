@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import com.erostech.kiki.*
 import com.erostech.kiki.listeners.InfiniteScrollListener
 import com.erostech.kiki.managers.CountriesManager
-import com.erostech.kiki.models.Country
-import com.erostech.kiki.models.PNAdCell
-import com.erostech.kiki.models.PNMediumLayoutAdCell
-import com.erostech.kiki.models.PNSmallLayoutAdCell
+import com.erostech.kiki.models.*
 import com.erostech.kiki.ui.adapters.CountriesAdapter
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.CountryDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.MoPubAdDelegateAdapter
 import javax.inject.Inject
 
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -127,5 +125,6 @@ class MainActivityFragment : RxBaseFragment(),
         countries.add(2, PNAdCell(NATIVE_PLACEMENT_ID))
         countries.add(4, PNSmallLayoutAdCell(LAYOUT_SMALL_PLACEMENT_ID))
         countries.add(6, PNMediumLayoutAdCell(LAYOUT_MEDIUM_PLACEMENT_ID))
+        countries.add(8, MoPubAdCell(MOPUB_AD_UNIT_ID))
     }
 }

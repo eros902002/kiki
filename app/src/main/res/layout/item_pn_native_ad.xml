@@ -3,7 +3,10 @@
     android:id="@+id/banner_container"
     android:layout_width="match_parent"
     android:layout_height="170dp"
-    android:visibility="gone">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
     <FrameLayout
         android:id="@+id/banner_view"
