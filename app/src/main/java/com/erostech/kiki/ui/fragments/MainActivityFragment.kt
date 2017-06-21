@@ -3,12 +3,10 @@ package com.erostech.kiki.ui.fragments
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import net.pubnative.sdk.core.request.PNAdModel
-import net.pubnative.sdk.core.request.PNRequest
 import com.erostech.kiki.*
 import com.erostech.kiki.listeners.InfiniteScrollListener
 import com.erostech.kiki.managers.CountriesManager
@@ -19,13 +17,11 @@ import com.erostech.kiki.models.PNSmallLayoutAdCell
 import com.erostech.kiki.ui.adapters.CountriesAdapter
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.CountryDelegateAdapter
-import com.google.android.gms.ads.AdRequest
-import com.mopub.mobileads.MoPubErrorCode
-import com.mopub.mobileads.MoPubView
-import java.lang.Exception
 import javax.inject.Inject
 
 import kotlinx.android.synthetic.main.fragment_main.*
+import net.pubnative.sdk.layouts.PNLargeLayout
+import net.pubnative.sdk.layouts.PNLayout
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.ArrayList
@@ -42,6 +38,7 @@ class MainActivityFragment : RxBaseFragment(),
 
     companion object {
         private val KEY_COUNTRIES = "countries"
+        //private val TAG = MainActivityFragment::class.simpleName
     }
 
     @Inject lateinit var countriesManager: CountriesManager
@@ -74,6 +71,20 @@ class MainActivityFragment : RxBaseFragment(),
             (countries_list.adapter as CountriesAdapter).addCountries(countries!!)
         } else {
             requestCountries()
+        }
+
+        if (savedInstanceState == null) {
+            val largeAd = PNLargeLayout()
+            largeAd.setLoadListener(object : PNLayout.LoadListener {
+                override fun onPNLayoutLoadFail(layout: PNLayout?, exception: Exception?) {
+                    Log.d("Large ad", exception!!.message ?: "")
+                }
+
+                override fun onPNLayoutLoadFinish(layout: PNLayout?) {
+                    largeAd.show()
+                }
+            })
+            largeAd.load(context, API_TOKEN, LAYOUT_LARGE_PLACEMENT_ID)
         }
     }
 

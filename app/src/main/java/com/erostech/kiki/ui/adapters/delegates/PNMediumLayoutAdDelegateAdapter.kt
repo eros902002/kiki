@@ -38,7 +38,7 @@ class PNMediumLayoutAdDelegateAdapter : ViewTypeDelegateAdapter {
 
         fun bind(item: PNMediumLayoutAdCell) = with(itemView) {
             adCell = item
-            adCell!!.request.setLoadListener(object: PNLayout.LoadListener {
+            adCell!!.request.setLoadListener(object : PNLayout.LoadListener {
                 override fun onPNLayoutLoadFail(layout: PNLayout?, exception: Exception?) {
                     Log.d(TAG, exception!!.message ?: "")
                 }
