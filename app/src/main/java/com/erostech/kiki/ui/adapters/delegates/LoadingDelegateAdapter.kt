@@ -1,8 +1,9 @@
-package com.erostech.kiki.ui.adapters
+package com.erostech.kiki.ui.adapters.delegates
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.erostech.kiki.R
+import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.util.inflate
 
 /**
@@ -15,5 +16,5 @@ class LoadingDelegateAdapter : ViewTypeDelegateAdapter {
 
     }
 
-    class LoadingViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder (parent.inflate(R.layout.item_loading))
+    class LoadingViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_loading))
 }

@@ -1,31 +1,27 @@
 package com.erostech.kiki.ui.fragments
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
-import android.os.Parcelable
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import net.pubnative.sdk.core.config.PNConfigManager
 import net.pubnative.sdk.core.request.PNAdModel
 import net.pubnative.sdk.core.request.PNRequest
-import android.widget.RelativeLayout
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.ProgressBar
-import com.erostech.kiki.API_TOKEN
-import com.erostech.kiki.KikiApplication
-import com.erostech.kiki.PLACEMENT_ID
-import com.erostech.kiki.R
+import com.erostech.kiki.*
 import com.erostech.kiki.listeners.InfiniteScrollListener
 import com.erostech.kiki.managers.CountriesManager
 import com.erostech.kiki.models.Country
+import com.erostech.kiki.models.PNAdCell
+import com.erostech.kiki.models.PNMediumLayoutAdCell
+import com.erostech.kiki.models.PNSmallLayoutAdCell
 import com.erostech.kiki.ui.adapters.CountriesAdapter
-import com.erostech.kiki.ui.adapters.CountryDelegateAdapter
-import com.erostech.kiki.util.RequestModel
+import com.erostech.kiki.ui.adapters.ViewType
+import com.erostech.kiki.ui.adapters.delegates.CountryDelegateAdapter
+import com.google.android.gms.ads.AdRequest
+import com.mopub.mobileads.MoPubErrorCode
+import com.mopub.mobileads.MoPubView
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -38,7 +34,8 @@ import java.util.ArrayList
 /**
  * A placeholder fragment containing a simple view.
  */
-class MainActivityFragment : RxBaseFragment(), CountryDelegateAdapter.onViewSelectedListener {
+class MainActivityFragment : RxBaseFragment(),
+        CountryDelegateAdapter.onViewSelectedListener {
     override fun onItemSelected(country: Country) {
 
     }
@@ -48,7 +45,7 @@ class MainActivityFragment : RxBaseFragment(), CountryDelegateAdapter.onViewSele
     }
 
     @Inject lateinit var countriesManager: CountriesManager
-    private var countries: List<Country>? = null
+    private var countries: List<ViewType>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +77,10 @@ class MainActivityFragment : RxBaseFragment(), CountryDelegateAdapter.onViewSele
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         val countriesList = (countries_list.adapter as CountriesAdapter).getCountries()
@@ -94,6 +95,7 @@ class MainActivityFragment : RxBaseFragment(), CountryDelegateAdapter.onViewSele
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                 { retrievedCountries ->
                     countries = retrievedCountries
+                    injectAds(countries!!)
                     (countries_list.adapter as CountriesAdapter).addCountries(countries!!)
                 },
                 { e ->
@@ -107,5 +109,12 @@ class MainActivityFragment : RxBaseFragment(), CountryDelegateAdapter.onViewSele
         if (countries_list.adapter == null) {
             countries_list.adapter = CountriesAdapter(this)
         }
+    }
+
+    private fun injectAds(countries: List<ViewType>) {
+        (countries as ArrayList<ViewType>)
+        countries.add(2, PNAdCell(NATIVE_PLACEMENT_ID))
+        countries.add(4, PNSmallLayoutAdCell(LAYOUT_SMALL_PLACEMENT_ID))
+        countries.add(6, PNMediumLayoutAdCell(LAYOUT_MEDIUM_PLACEMENT_ID))
     }
 }

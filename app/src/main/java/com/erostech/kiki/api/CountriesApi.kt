@@ -8,6 +8,6 @@ import retrofit2.http.GET
  * Created by erosgarciaponte on 19.06.17.
  */
 interface CountriesApi {
-    @GET("name/colombia")
+    @GET("all")
     fun getCountries(): Call<List<CountryResponse>>
 }

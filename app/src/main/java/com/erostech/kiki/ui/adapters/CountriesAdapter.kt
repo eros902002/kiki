@@ -2,9 +2,9 @@ package com.erostech.kiki.ui.adapters
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
-import android.util.SparseArray
 import android.view.ViewGroup
 import com.erostech.kiki.models.Country
+import com.erostech.kiki.ui.adapters.delegates.*
 
 /**
  * Created by erosgarciaponte on 19.06.17.
@@ -19,6 +19,9 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
     init {
         delegateAdapters.put(AdapterConstants.LOADING, LoadingDelegateAdapter())
         delegateAdapters.put(AdapterConstants.COUNTRY, CountryDelegateAdapter(listener))
+        delegateAdapters.put(AdapterConstants.PN_NATIVE_AD, PNNativeAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.PN_LAYOUT_SMALL_AD, PNSmallLayoutAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.PN_LAYOUT_MEDIUM_AD, PNMediumLayoutAdDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }
@@ -39,7 +42,7 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
         return this.items[position].getViewType()
     }
 
-    fun addCountries(countries: List<Country>) {
+    fun addCountries(countries: List<ViewType>) {
         val initPosition = items.size -1
         items.removeAt(initPosition)
         notifyItemRemoved(initPosition)
