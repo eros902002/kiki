@@ -1,20 +1,15 @@
-package com.erostech.kiki.ui.adapters.delegates
+package com.erostech.kiki.ui.adapters.delegates.pubnative
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.erostech.kiki.API_TOKEN
 import com.erostech.kiki.R
-import com.erostech.kiki.models.PNAdCell
 import com.erostech.kiki.models.PNMediumLayoutAdCell
-import com.erostech.kiki.models.PNSmallLayoutAdCell
 import com.erostech.kiki.ui.adapters.ViewType
+import com.erostech.kiki.ui.adapters.delegates.ViewTypeDelegateAdapter
 import com.erostech.kiki.util.inflate
-import com.erostech.kiki.util.showToast
-import net.pubnative.sdk.core.request.PNAdModel
-import net.pubnative.sdk.core.request.PNRequest
 import net.pubnative.sdk.layouts.PNLayout
 import java.lang.Exception
 

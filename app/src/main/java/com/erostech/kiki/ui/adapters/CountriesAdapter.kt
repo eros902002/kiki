@@ -5,6 +5,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.erostech.kiki.models.Country
 import com.erostech.kiki.ui.adapters.delegates.*
+import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubBannerAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubMediumAdBannerDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubNativeAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.pubnative.PNMediumLayoutAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.pubnative.PNNativeAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.pubnative.PNSmallLayoutAdDelegateAdapter
 
 /**
  * Created by erosgarciaponte on 19.06.17.
@@ -22,7 +28,9 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
         delegateAdapters.put(AdapterConstants.PN_NATIVE_AD, PNNativeAdDelegateAdapter())
         delegateAdapters.put(AdapterConstants.PN_LAYOUT_SMALL_AD, PNSmallLayoutAdDelegateAdapter())
         delegateAdapters.put(AdapterConstants.PN_LAYOUT_MEDIUM_AD, PNMediumLayoutAdDelegateAdapter())
-        delegateAdapters.put(AdapterConstants.MOPUD_NATIVE_AD, MoPubAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.MOPUB_NATIVE_AD, MoPubNativeAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.MOPUB_BANNER_AD, MoPubBannerAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.MOPUB_MEDIUM_AD, MoPubMediumAdBannerDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)
     }

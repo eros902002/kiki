@@ -14,7 +14,8 @@ import com.erostech.kiki.models.*
 import com.erostech.kiki.ui.adapters.CountriesAdapter
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.CountryDelegateAdapter
-import com.erostech.kiki.ui.adapters.delegates.MoPubAdDelegateAdapter
+import com.mopub.mobileads.MoPubErrorCode
+import com.mopub.mobileads.MoPubInterstitial
 import javax.inject.Inject
 
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -28,7 +29,7 @@ import java.util.ArrayList
 /**
  * A placeholder fragment containing a simple view.
  */
-class MainActivityFragment : RxBaseFragment(),
+class MainFragment : RxBaseFragment(),
         CountryDelegateAdapter.onViewSelectedListener {
     override fun onItemSelected(country: Country) {
 
@@ -36,11 +37,13 @@ class MainActivityFragment : RxBaseFragment(),
 
     companion object {
         private val KEY_COUNTRIES = "countries"
-        //private val TAG = MainActivityFragment::class.simpleName
+        //private val TAG = MainFragment::class.simpleName
     }
 
     @Inject lateinit var countriesManager: CountriesManager
     private var countries: List<ViewType>? = null
+
+    private var mopubInterstitial : MoPubInterstitial? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +75,8 @@ class MainActivityFragment : RxBaseFragment(),
         }
 
         if (savedInstanceState == null) {
-            val largeAd = PNLargeLayout()
+            // Code for PubNative Interstitial
+            /*val largeAd = PNLargeLayout()
             largeAd.setLoadListener(object : PNLayout.LoadListener {
                 override fun onPNLayoutLoadFail(layout: PNLayout?, exception: Exception?) {
                     Log.d("Large ad", exception!!.message ?: "")
@@ -82,13 +86,42 @@ class MainActivityFragment : RxBaseFragment(),
                     largeAd.show()
                 }
             })
-            largeAd.load(context, API_TOKEN, LAYOUT_LARGE_PLACEMENT_ID)
+            largeAd.load(context, API_TOKEN, LAYOUT_LARGE_PLACEMENT_ID)*/
+
+            // Code for MoPub Interstitial
+
+            mopubInterstitial = MoPubInterstitial(activity, MOPUB_LARGE_AD_UNIT_ID)
+            (mopubInterstitial as MoPubInterstitial).interstitialAdListener = object : MoPubInterstitial.InterstitialAdListener {
+                override fun onInterstitialLoaded(interstitial: MoPubInterstitial?) {
+                    Log.d("Large ad", "onInterstitialLoaded")
+                }
+
+                override fun onInterstitialFailed(interstitial: MoPubInterstitial?, errorCode: MoPubErrorCode?) {
+                    Log.d("Large ad", "onInterstitialFailed: ${errorCode.toString()}")
+                }
+
+                override fun onInterstitialClicked(interstitial: MoPubInterstitial?) {
+                    Log.d("Large ad", "onInterstitialClicked")
+                }
+
+                override fun onInterstitialDismissed(interstitial: MoPubInterstitial?) {
+                    Log.d("Large ad", "onInterstitialDismissed")
+                }
+
+                override fun onInterstitialShown(interstitial: MoPubInterstitial?) {
+                    Log.d("Large ad", "onInterstitialShown")
+                }
+            }
+            (mopubInterstitial as MoPubInterstitial).load()
         }
     }
 
     override fun onDestroy() {
+        mopubInterstitial?.destroy()
         super.onDestroy()
     }
+
+
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
@@ -125,6 +158,8 @@ class MainActivityFragment : RxBaseFragment(),
         countries.add(2, PNAdCell(NATIVE_PLACEMENT_ID))
         countries.add(4, PNSmallLayoutAdCell(LAYOUT_SMALL_PLACEMENT_ID))
         countries.add(6, PNMediumLayoutAdCell(LAYOUT_MEDIUM_PLACEMENT_ID))
-        countries.add(8, MoPubAdCell(MOPUB_AD_UNIT_ID))
+        countries.add(8, MoPubNativeAdCell(MOPUB_NATIVE_AD_UNIT_ID))
+        countries.add(10, MoPubBannerAdCell(MOPUB_BANNER_AD_UNIT_ID))
+        countries.add(12, MoPubMediumAdCell(MOPUB_MEDIUM_AD_UNIT_ID))
     }
 }
