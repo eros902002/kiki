@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <com.google.android.gms.ads.NativeExpressAdView
+        android:id="@+id/admob_native_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adUnitId="ca-app-pub-1851603248298653/7310151922"
+        ads:adSize="280x80" />
+</FrameLayout>

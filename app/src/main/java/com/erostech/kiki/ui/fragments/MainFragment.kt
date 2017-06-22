@@ -14,6 +14,9 @@ import com.erostech.kiki.models.*
 import com.erostech.kiki.ui.adapters.CountriesAdapter
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.CountryDelegateAdapter
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubInterstitial
 import javax.inject.Inject
@@ -75,45 +78,66 @@ class MainFragment : RxBaseFragment(),
         }
 
         if (savedInstanceState == null) {
-            // Code for PubNative Interstitial
-            /*val largeAd = PNLargeLayout()
-            largeAd.setLoadListener(object : PNLayout.LoadListener {
-                override fun onPNLayoutLoadFail(layout: PNLayout?, exception: Exception?) {
-                    Log.d("Large ad", exception!!.message ?: "")
-                }
-
-                override fun onPNLayoutLoadFinish(layout: PNLayout?) {
-                    largeAd.show()
-                }
-            })
-            largeAd.load(context, API_TOKEN, LAYOUT_LARGE_PLACEMENT_ID)*/
-
-            // Code for MoPub Interstitial
-
-            mopubInterstitial = MoPubInterstitial(activity, MOPUB_LARGE_AD_UNIT_ID)
-            (mopubInterstitial as MoPubInterstitial).interstitialAdListener = object : MoPubInterstitial.InterstitialAdListener {
-                override fun onInterstitialLoaded(interstitial: MoPubInterstitial?) {
-                    Log.d("Large ad", "onInterstitialLoaded")
-                }
-
-                override fun onInterstitialFailed(interstitial: MoPubInterstitial?, errorCode: MoPubErrorCode?) {
-                    Log.d("Large ad", "onInterstitialFailed: ${errorCode.toString()}")
-                }
-
-                override fun onInterstitialClicked(interstitial: MoPubInterstitial?) {
-                    Log.d("Large ad", "onInterstitialClicked")
-                }
-
-                override fun onInterstitialDismissed(interstitial: MoPubInterstitial?) {
-                    Log.d("Large ad", "onInterstitialDismissed")
-                }
-
-                override fun onInterstitialShown(interstitial: MoPubInterstitial?) {
-                    Log.d("Large ad", "onInterstitialShown")
-                }
-            }
-            (mopubInterstitial as MoPubInterstitial).load()
+            //showPubNativeInterstitial()
+            //showMoPubInterstitial()
+            showAdmobInterstitial()
         }
+    }
+
+    fun showPubNativeInterstitial() {
+        val largeAd = PNLargeLayout()
+        largeAd.setLoadListener(object : PNLayout.LoadListener {
+            override fun onPNLayoutLoadFail(layout: PNLayout?, exception: Exception?) {
+                Log.d("Large ad", exception!!.message ?: "")
+            }
+
+            override fun onPNLayoutLoadFinish(layout: PNLayout?) {
+                largeAd.show()
+            }
+        })
+        largeAd.load(context, API_TOKEN, LAYOUT_LARGE_PLACEMENT_ID)
+    }
+
+    fun showMoPubInterstitial() {
+        mopubInterstitial = MoPubInterstitial(activity, MOPUB_LARGE_AD_UNIT_ID)
+        (mopubInterstitial as MoPubInterstitial).interstitialAdListener = object : MoPubInterstitial.InterstitialAdListener {
+            override fun onInterstitialLoaded(interstitial: MoPubInterstitial?) {
+                Log.d("Large ad", "onInterstitialLoaded")
+            }
+
+            override fun onInterstitialFailed(interstitial: MoPubInterstitial?, errorCode: MoPubErrorCode?) {
+                Log.d("Large ad", "onInterstitialFailed: ${errorCode.toString()}")
+            }
+
+            override fun onInterstitialClicked(interstitial: MoPubInterstitial?) {
+                Log.d("Large ad", "onInterstitialClicked")
+            }
+
+            override fun onInterstitialDismissed(interstitial: MoPubInterstitial?) {
+                Log.d("Large ad", "onInterstitialDismissed")
+            }
+
+            override fun onInterstitialShown(interstitial: MoPubInterstitial?) {
+                Log.d("Large ad", "onInterstitialShown")
+            }
+        }
+        (mopubInterstitial as MoPubInterstitial).load()
+    }
+
+    fun showAdmobInterstitial() {
+        val admobInsterstitial = InterstitialAd(activity)
+        admobInsterstitial.adUnitId = ADMOB_LARGE_BLOCK_ID
+        val request = AdRequest.Builder().build()
+        admobInsterstitial.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                admobInsterstitial.show()
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+
+            }
+        }
+        admobInsterstitial.loadAd(request)
     }
 
     override fun onDestroy() {
@@ -161,5 +185,7 @@ class MainFragment : RxBaseFragment(),
         countries.add(8, MoPubNativeAdCell(MOPUB_NATIVE_AD_UNIT_ID))
         countries.add(10, MoPubBannerAdCell(MOPUB_BANNER_AD_UNIT_ID))
         countries.add(12, MoPubMediumAdCell(MOPUB_MEDIUM_AD_UNIT_ID))
+        countries.add(14, AdmobBannerAdCell())
+        countries.add(16, AdmobNativeAdCell())
     }
 }

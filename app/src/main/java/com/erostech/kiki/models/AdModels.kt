@@ -82,3 +82,11 @@ class MoPubMediumAdCell(var adUnitId: String) : ViewType {
 
     override fun getViewType(): Int = AdapterConstants.MOPUB_MEDIUM_AD
 }
+
+class AdmobBannerAdCell() : ViewType {
+    override fun getViewType(): Int = AdapterConstants.ADMOB_BANNER_AD
+}
+
+class AdmobNativeAdCell() : ViewType {
+    override fun getViewType(): Int = AdapterConstants.ADMOB_NATIVE_AD
+}
