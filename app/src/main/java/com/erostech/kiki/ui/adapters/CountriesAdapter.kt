@@ -7,6 +7,8 @@ import com.erostech.kiki.models.Country
 import com.erostech.kiki.ui.adapters.delegates.*
 import com.erostech.kiki.ui.adapters.delegates.admob.AdmobBannerAdDelegateAdapter
 import com.erostech.kiki.ui.adapters.delegates.admob.AdmobNativeAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.facebook.FBBannerAdDelegateAdapter
+import com.erostech.kiki.ui.adapters.delegates.facebook.FBNativeAdDelegateAdapter
 import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubBannerAdDelegateAdapter
 import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubMediumAdBannerDelegateAdapter
 import com.erostech.kiki.ui.adapters.delegates.mopub.MoPubNativeAdDelegateAdapter
@@ -35,6 +37,9 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
         delegateAdapters.put(AdapterConstants.MOPUB_MEDIUM_AD, MoPubMediumAdBannerDelegateAdapter())
         delegateAdapters.put(AdapterConstants.ADMOB_BANNER_AD, AdmobBannerAdDelegateAdapter())
         delegateAdapters.put(AdapterConstants.ADMOB_NATIVE_AD, AdmobNativeAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.FACEBOOK_BANNER_AD, FBBannerAdDelegateAdapter())
+        delegateAdapters.put(AdapterConstants.FACEBOOK_NATIVE_AD, FBNativeAdDelegateAdapter())
+
         items = ArrayList()
         items.add(loadingItem)
     }
@@ -53,6 +58,13 @@ class CountriesAdapter(listener: CountryDelegateAdapter.onViewSelectedListener) 
 
     override fun getItemViewType(position: Int): Int {
         return this.items[position].getViewType()
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder?) {
+        super.onViewDetachedFromWindow(holder)
+        if (holder is DestroyableView) {
+            holder.destroy()
+        }
     }
 
     fun addCountries(countries: List<ViewType>) {

@@ -1,5 +1,6 @@
 package com.erostech.kiki.ui.adapters.delegates.pubnative
 
+import com.erostech.kiki.ui.adapters.DestroyableView
 import com.erostech.kiki.util.inflate
 
 /**
@@ -14,7 +15,7 @@ class PNSmallLayoutAdDelegateAdapter : com.erostech.kiki.ui.adapters.delegates.V
     }
 
     inner class PNSmallLayoutViewHolder(parent: android.view.ViewGroup) : android.support.v7.widget.RecyclerView.ViewHolder(
-            parent.inflate(com.erostech.kiki.R.layout.item_pn_layout_small)) {
+            parent.inflate(com.erostech.kiki.R.layout.item_pn_layout_small)), DestroyableView {
 
         private val TAG = com.erostech.kiki.ui.adapters.delegates.pubnative.PNSmallLayoutAdDelegateAdapter.PNSmallLayoutViewHolder::class.java!!.getSimpleName()
 
@@ -34,6 +35,10 @@ class PNSmallLayoutAdDelegateAdapter : com.erostech.kiki.ui.adapters.delegates.V
                 }
             })
             adCell!!.request.load(itemView.context, com.erostech.kiki.API_TOKEN, adCell!!.placementID)
+        }
+
+        override fun destroy() {
+            adCell?.request?.stopTrackingView()
         }
     }
 }

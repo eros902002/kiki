@@ -1,5 +1,6 @@
 package com.erostech.kiki.ui.adapters.delegates.pubnative
 
+import com.erostech.kiki.ui.adapters.DestroyableView
 import com.erostech.kiki.util.inflate
 
 /**
@@ -14,7 +15,7 @@ class PNNativeAdDelegateAdapter : com.erostech.kiki.ui.adapters.delegates.ViewTy
     }
 
     inner class PNNativeAdViewHolder(parent: android.view.ViewGroup) : android.support.v7.widget.RecyclerView.ViewHolder(
-            parent.inflate(com.erostech.kiki.R.layout.item_pn_native_ad)) {
+            parent.inflate(com.erostech.kiki.R.layout.item_pn_native_ad)), DestroyableView {
 
         private val TAG = com.erostech.kiki.ui.adapters.delegates.pubnative.PNNativeAdDelegateAdapter.PNNativeAdViewHolder::class.java!!.getSimpleName()
 
@@ -73,8 +74,7 @@ class PNNativeAdDelegateAdapter : com.erostech.kiki.ui.adapters.delegates.ViewTy
 
         private fun renderAd() {
             if (adCell?.adModel != null) {
-                val adModel = adCell?.adModel
-                adModel!!.withTitle(titleView)
+                adCell?.adModel!!.withTitle(titleView)
                         .withIcon(iconView)
                         .withDescription(descriptionView)
                         .withCallToAction(callToActionView)
@@ -83,6 +83,10 @@ class PNNativeAdDelegateAdapter : com.erostech.kiki.ui.adapters.delegates.ViewTy
                         .withContentInfoContainer(disclosureView)
                         .startTracking(bannerView)
             }
+        }
+
+        override fun destroy() {
+            adCell?.adModel?.stopTracking()
         }
     }
 }

@@ -14,4 +14,6 @@ object AdapterConstants {
     val MOPUB_MEDIUM_AD = 8
     val ADMOB_NATIVE_AD = 9
     val ADMOB_BANNER_AD = 10
+    val FACEBOOK_BANNER_AD = 11
+    val FACEBOOK_NATIVE_AD = 12
 }

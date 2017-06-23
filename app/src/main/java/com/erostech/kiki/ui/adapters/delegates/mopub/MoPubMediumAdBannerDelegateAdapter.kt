@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.ViewGroup
 import com.erostech.kiki.R
 import com.erostech.kiki.models.MoPubMediumAdCell
+import com.erostech.kiki.ui.adapters.DestroyableView
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.ViewTypeDelegateAdapter
 import com.erostech.kiki.util.inflate
@@ -23,7 +24,7 @@ class MoPubMediumAdBannerDelegateAdapter : ViewTypeDelegateAdapter {
     }
 
     inner class MoPubMediumAdViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            parent.inflate(R.layout.item_mopub_medium)) {
+            parent.inflate(R.layout.item_mopub_medium)), DestroyableView {
         private val TAG = MoPubMediumAdViewHolder::class.java!!.getSimpleName()
 
         val mopubView : MoPubView
@@ -56,6 +57,10 @@ class MoPubMediumAdBannerDelegateAdapter : ViewTypeDelegateAdapter {
                     Log.d(TAG, "onBannerLoaded")
                 }
             }
+        }
+
+        override fun destroy() {
+            mopubView.destroy()
         }
     }
 }

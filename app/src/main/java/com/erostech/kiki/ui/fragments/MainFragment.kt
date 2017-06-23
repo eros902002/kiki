@@ -187,5 +187,7 @@ class MainFragment : RxBaseFragment(),
         countries.add(12, MoPubMediumAdCell(MOPUB_MEDIUM_AD_UNIT_ID))
         countries.add(14, AdmobBannerAdCell())
         countries.add(16, AdmobNativeAdCell())
+        countries.add(18, FBBannerAdCell(FACEBOOK_BANNER_PLACEMENT))
+        countries.add(20, FBNativeAdCell(FACEBOOK_NATIVE_PLACEMENT))
     }
 }

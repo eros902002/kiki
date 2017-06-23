@@ -7,6 +7,7 @@ import android.widget.*
 import com.erostech.kiki.API_TOKEN
 import com.erostech.kiki.R
 import com.erostech.kiki.models.PNMediumLayoutAdCell
+import com.erostech.kiki.ui.adapters.DestroyableView
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.ViewTypeDelegateAdapter
 import com.erostech.kiki.util.inflate
@@ -25,7 +26,7 @@ class PNMediumLayoutAdDelegateAdapter : ViewTypeDelegateAdapter {
     }
 
     inner class PNMediumLayoutViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            parent.inflate(R.layout.item_pn_layout_medium)) {
+            parent.inflate(R.layout.item_pn_layout_medium)), DestroyableView {
 
         private val TAG = PNMediumLayoutViewHolder::class.java!!.getSimpleName()
 
@@ -45,6 +46,10 @@ class PNMediumLayoutAdDelegateAdapter : ViewTypeDelegateAdapter {
                 }
             })
             adCell!!.request.load(itemView.context, API_TOKEN, adCell!!.placementID)
+        }
+
+        override fun destroy() {
+            adCell?.request?.stopTrackingView()
         }
     }
 }

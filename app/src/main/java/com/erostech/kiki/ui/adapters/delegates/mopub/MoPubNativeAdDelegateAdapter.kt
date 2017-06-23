@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.erostech.kiki.R
 import com.erostech.kiki.models.MoPubNativeAdCell
+import com.erostech.kiki.ui.adapters.DestroyableView
 import com.erostech.kiki.ui.adapters.ViewType
 import com.erostech.kiki.ui.adapters.delegates.ViewTypeDelegateAdapter
 import com.erostech.kiki.util.inflate
@@ -23,16 +24,18 @@ class MoPubNativeAdDelegateAdapter : ViewTypeDelegateAdapter {
     }
 
     inner class MoPubNativeAdViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            parent.inflate(R.layout.item_mopub_native)) {
+            parent.inflate(R.layout.item_mopub_native)), DestroyableView {
 
         private val TAG = MoPubNativeAdViewHolder::class.java!!.getSimpleName()
+
+        var mopubNative : MoPubNative? = null
 
         init {
 
         }
 
         fun bind(item: MoPubNativeAdCell) = with(itemView) {
-            val mopubNative = MoPubNative(context, item.adUnitId, object : MoPubNative.MoPubNativeNetworkListener {
+            mopubNative = MoPubNative(context, item.adUnitId, object : MoPubNative.MoPubNativeNetworkListener {
                 override fun onNativeFail(errorCode: NativeErrorCode?) {
                     Log.d(TAG, errorCode.toString())
                 }
@@ -55,8 +58,12 @@ class MoPubNativeAdDelegateAdapter : ViewTypeDelegateAdapter {
                     .build()
             val adRenderer = MoPubStaticNativeAdRenderer(viewBinder)
 
-            mopubNative.registerAdRenderer(adRenderer)
-            mopubNative.makeRequest()
+            mopubNative?.registerAdRenderer(adRenderer)
+            mopubNative?.makeRequest()
+        }
+
+        override fun destroy() {
+            mopubNative?.destroy()
         }
     }
 }
